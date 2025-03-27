@@ -1,1 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillConnect - Entrepreneurship Platform</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .feature-card {
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            color: white;
+        }
+        
+        .bg-primary-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .bg-success-gradient {
+            background: linear-gradient(135deg, var(--success), #34d399);
+        }
+        
+        .bg-warning-gradient {
+            background: linear-gradient(135deg, var(--warning), #fbbf24);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-card {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+        
+        .testimonial-card {
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .partner-logo {
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 6rem 0;
+            }
+            
+            .feature-card, .testimonial-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <span class="text-gradient">SkillConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Success Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#partners">Partners</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary rounded-pill px-4" href="/login">Log In</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary rounded-pill px-4" href="/register">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="display-4 fw-bold mb-4">Empowering Entrepreneurs Through Skills & Connections</h1>
+                    <p class="lead text-muted mb-5">
+                        SkillConnect bridges the gap between aspiring entrepreneurs and mentors, 
+                        providing accessible training and resources via SMS, USSD, and voice services.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="/register" class="btn btn-primary btn-lg rounded-pill px-4 py-3">
+                            Get Started <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#features" class="btn btn-outline-primary btn-lg rounded-pill px-4 py-3">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="SkillConnect platform illustration" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="800">
+                    <div class="stats-card">
+                        <i class="fas fa-users stats-icon"></i>
+                        <div class="stats-number">5,000+</div>
+                        <p class="text-muted mb-0">Entrepreneurs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="stats-card">
+                        <i class="fas fa-book stats-icon"></i>
+                        <div class="stats-number">50+</div>
+                        <p class="text-muted mb-0">Learning Modules</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="stats-card">
+                        <i class="fas fa-user-tie stats-icon"></i>
+                        <div class="stats-number">100+</div>
+                        <p class="text-muted mb-0">Expert Mentors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="stats-card">
+                        <i class="fas fa-globe-africa stats-icon"></i>
+                        <div class="stats-number">15+</div>
+                        <p class="text-muted mb-0">Countries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h6 class="text-uppercase text-primary fw-bold mb-3">Features</h6>
+                <h2 class="display-5 fw-bold mb-4">Accessible Entrepreneurship Training</h2>
+                <p class="text-muted mx-auto" style="max-width: 700px;">
+                    Our platform leverages Africa's Talking APIs to make entrepreneurship training and resources accessible to everyone, regardless of their device or connectivity.
+                </p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-primary-gradient">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">SMS Learning Modules</h3>
+                        <p class="text-muted mb-0">Receive bite-sized entrepreneurship lessons and business tips directly via SMS, accessible on any mobile device.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-success-gradient">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">USSD Skill Assessment</h3>
+                        <p class="text-muted mb-0">Dial our USSD code to take skill assessments, track progress, and receive personalized learning recommendations.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-warning-gradient">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Mentor Matching</h3>
+                        <p class="text-muted mb-0">Get connected with experienced entrepreneurs in your field who can provide guidance and support.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-primary-gradient">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Funding Alerts</h3>
+                        <p class="text-muted mb-0">Receive notifications about grants, loans, and investment opportunities relevant to your business sector.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-success-gradient">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Voice Learning</h3>
+                        <p class="text-muted mb-0">Access audio lessons and Q&A sessions through our voice service, perfect for on-the-go learning.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-warning-gradient">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Community Chat</h3>
+                        <p class="text-muted mb-0">Connect with fellow entrepreneurs to share experiences, challenges, and opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h6 class="text-uppercase text-primary fw-bold mb-3">Process</h6>
+                <h2 class="display-5 fw-bold mb-4">How SkillConnect Works</h2>
+                <p class="text-muted mx-auto" style="max-width: 700px;">
+                    Our platform is designed to be accessible to entrepreneurs at all levels, regardless of their device or connectivity.
+                </p>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Register via SMS or USSD</h3>
+                            <p class="text-muted">Send an SMS to our number or dial our USSD code to create your profile and specify your interests and skill level.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Receive Personalized Learning Path</h3>
+                            <p class="text-muted">Based on your profile, we'll create a customized learning journey with relevant modules and resources.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Learn Through Multiple Channels</h3>
+                            <p class="text-muted">Access content via SMS, USSD menus, or voice calls depending on your preference and connectivity.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Connect with Mentors and Peers</h3>
+                            <p class="text-muted">Get matched with mentors and join community discussions to expand your network and knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Step-by-step illustration of the SkillConnect process" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h6 class="text-uppercase text-primary fw-bold mb-3">Testimonials</h6>
+                <h2 class="display-5 fw-bold mb-4">Success Stories</h2>
+                <p class="text-muted mx-auto" style="max-width: 700px;">
+                    Hear from entrepreneurs who have transformed their businesses using SkillConnect.
+                </p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Mwangi" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0 fw-bold">Sarah Mwangi</h5>
+                                <p class="text-muted mb-0">Handcrafted Jewelry</p>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3">"SkillConnect's SMS lessons helped me learn business basics while managing my shop. The mentor matching connected me with an experienced jeweler who helped me scale my business."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Odhiambo" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0 fw-bold">John Odhiambo</h5>
+                                <p class="text-muted mb-0">Urban Farming</p>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3">"The USSD skill assessments identified gaps in my financial knowledge. Through the voice learning modules, I improved my bookkeeping and secured a small business loan."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Amina Hassan" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0 fw-bold">Amina Hassan</h5>
+                                <p class="text-muted mb-0">Tech Repair Service</p>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3">"As someone with limited internet access, SkillConnect's SMS and voice services were perfect. I learned marketing strategies that helped me grow my customer base by 70%."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h6 class="text-uppercase text-primary fw-bold mb-3">Partners</h6>
+                <h2 class="display-5 fw-bold mb-4">Our Trusted Partners</h2>
+                <p class="text-muted mx-auto" style="max-width: 700px;">
+                    We collaborate with leading organizations to provide the best resources and opportunities for entrepreneurs.
+                </p>
+            </div>
+            
+            <div class="row align-items-center g-5">
+                <div class="col-6 col-md-3 text-center" data-aos="fade-up" data-aos-duration="800">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mastercard_Logo_%282016%29.svg/2560px-Mastercard_Logo_%282016%29.svg.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/2560px-Meta_Platforms_Inc._logo.svg.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" alt="Partner Logo" class="partner-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content text-center">
+            <div data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-4">Ready to Start Your Entrepreneurship Journey?</h2>
+                <p class="lead mb-5 mx-auto" style="max-width: 700px;">
+                    Join thousands of entrepreneurs across Africa who are building successful businesses with the help of SkillConnect.
+                </p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <a href="/register" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-semibold">
+                        Sign Up Now <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    <a href="#features" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="fw-bold mb-4 text-gradient">SkillConnect</h4>
+                    <p class="text-muted">
+                        Empowering entrepreneurs through accessible skills development and networking.
+                    </p>
+                    <div class="mt-4">
+                        <a href="https://facebook.com" class="social-icon" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com" class="social-icon" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-4">Features</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">SMS Learning</a></li>
+                        <li><a href="#" class="footer-link">USSD Assessments</a></li>
+                        <li><a href="#" class="footer-link">Mentor Matching</a></li>
+                        <li><a href="#" class="footer-link">Voice Learning</a></li>
+                        <li><a href="#" class="footer-link">Community Chat</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                        <li><a href="#" class="footer-link">Success Stories</a></li>
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                        <li><a href="#" class="footer-link">Support</a></li>
+                        <li><a href="#" class="footer-link">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-4">Contact</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-3"><i class="fas fa-sms me-2"></i> SMS: +254 XXX XXX XXX</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> USSD: *XXX#</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> Email: info@skillconnect.com</li>
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-4 pt-4 text-center text-muted">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> SkillConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+
 
