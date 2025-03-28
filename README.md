@@ -1,5 +1,3 @@
-# SkillConnect.
-SkillConnect is a mobile-first entrepreneurship platform designed to empower aspiring and existing entrepreneurs through accessible skills development and networking.
 # SkillConnect: Python-based Entrepreneurship Platform
 
 SkillConnect is a mobile-first entrepreneurship platform designed to empower aspiring and existing entrepreneurs through accessible skills development and networking. The platform leverages Africa's Talking APIs (SMS, USSD, and Voice) to make entrepreneurship training and resources available to users regardless of their device or internet connectivity.
@@ -31,3 +29,4 @@ This Python-based implementation of SkillConnect provides:
 ### Setup
 
 1. Clone the repository:
+
