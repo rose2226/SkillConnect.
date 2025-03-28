@@ -65,10 +65,14 @@ def log_interaction(channel, phone_number, request_data, response_data):
 def main():
     st.title("SkillConnect - Entrepreneurship Platform")
     
+    # Debug information
+    st.write("App is running. If you can see this message, the app is working correctly.")
+    
     # Sidebar navigation
     st.sidebar.title("Navigation")
     page = st.sidebar.radio("Go to", ["Home", "SMS Demo", "USSD Demo", "Voice Demo", "Learning Modules", "Mentors"])
     
+    # Display content based on selection
     if page == "Home":
         show_home_page()
     elif page == "SMS Demo":
@@ -294,6 +298,19 @@ def show_mentors():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
